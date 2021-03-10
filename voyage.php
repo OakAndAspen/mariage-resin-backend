@@ -22,9 +22,16 @@ if (!$db) {
     exit();
 }
 
-// Try to create a new inscription
-if (!insertNewInscription($data, $db)) {
-    http_response_code(400);
-    echo json_encode(["error" => "Couldn't create new inscription"]);
+// If the form was posted, deal with it
+if($data['id']) {
+    return updateVoyage($data, $db);
+}
+// Otherwise, send the list of gifts
+else {
+    $sql = "SELECT * FROM voyage;";
+    $res = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($res);
     exit();
 }
+
+
