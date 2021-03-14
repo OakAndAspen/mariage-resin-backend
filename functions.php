@@ -23,8 +23,9 @@ function connectToDatabase()
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $conn;
     } catch (PDOException $e) {
-        echo "Connection failed: " . $e->getMessage();
-        return null;
+        http_response_code(400);
+        echo json_encode(["error" => "Couldn't connect to database"]);
+        exit();
     }
 }
 
@@ -35,6 +36,8 @@ function quote($string)
 
 function insertNewInscription($data, $db)
 {
+    if(!$data['nom']) die();
+
     $nom = quote($data['nom']);
     $nbCeremonie = quote($data['participants']['ceremonie']);
     $nbApero = quote($data['participants']['apero']);
