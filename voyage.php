@@ -24,6 +24,9 @@ if($data['id']) {
         http_response_code(400);
         echo json_encode(["error" => "Couldn't update voyage"]);
         exit();
+    } else {
+        echo json_encode(["ok" => "We did it!"]);
+        exit();
     }
 }
 // Otherwise, send the list of gifts

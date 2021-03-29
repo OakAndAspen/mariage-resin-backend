@@ -2,7 +2,7 @@
 
 function checkSecretKey() {
 
-    $secretKey = 'nX?3Wc9Kfr=@AjFe';
+    $secretKey = 'aLZ5bmeu3PpwQv5n';
 
     if (!isset($_GET['secretKey']) || $_GET['secretKey'] !== $secretKey) {
         http_response_code(400);
